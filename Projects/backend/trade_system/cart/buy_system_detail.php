@@ -3,10 +3,10 @@
 
 <?php 	
 		
-		$fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-		if(strpos($fullUrl,'idp=')){
+		
 			
-			$idp = $_GET['idp'];
+			
+			$idp = $_POST['idp'];
 
 			$sql = "SELECT * FROM product WHERE idp = ".$idp."";
 			$result = pg_query($conn,$sql);
@@ -19,14 +19,14 @@
 				header('location:../../../frontend/index.php?fail');
 			}else
 			{
-			$sql = "SELECT * FROM buy WHERE idc = '$idc' AND idp = '$idp' and status=0";
+			$sql = "SELECT * FROM buy WHERE idc = '$idc' AND idp = '$idp' and status =0";
 			$result = pg_query($conn,$sql);
 			$num=pg_num_rows($result);
 			$add = pg_fetch_assoc($result);
 
 			if($num==0)
 			{
-				$sql = "INSERT INTO buy(idc,idp,quantity,date,status) values ('$idc','$idp','$quantity','".date("m/d/Y")."',0)";
+				$sql = "INSERT INTO buy(idc,idp,quantity,date) values ('$idc','$idp','$quantity','".date("m/d/Y")."')";
 				$result = pg_query($conn,$sql);
 				$sql = "SELECT * FROM product WHERE idp ='$idp'";
 				$result= pg_query($conn,$sql);
@@ -54,36 +54,10 @@
 				pg_query($conn,$sql);
 
 			}
-			$url = $_SERVER['HTTP_REFERER'];
-			if(strpos($url,'?'))
-			{
-				if(strpos($url,'&sucess'))
-				{
-					$url = explode('&suc', $url);
-					array_pop($url);
-					$url = implode($url);
-					header("location:".$url."&sucess");
-				}
-				else if(strpos($url,'?sucess'))
-				{
-					$url = explode('?suc', $url);
-					array_pop($url);
-					$url = implode($url);
-					header("location:".$url."?sucess");
-				}
-				else
-				{
-					
-					header("location:".$url."&sucess");
-				}
-				
-			}else
-			{
-				header("location:".$url."?sucess");
-			}
-
+			
+			
 
 			
 		}
-		}
+		
  ?>
