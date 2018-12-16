@@ -145,7 +145,7 @@
 								else{
 
 								echo "
-														<a href='#'' class='btn btn-default add-to-cart'></i>Views detail</a>
+														<a href='./product_details.php?idp=".$row['idp']."' class='btn btn-default add-to-cart'></i>Views detail</a>
 														<p>Or</p>
 														";
 									if(isset($_SESSION['id']))
