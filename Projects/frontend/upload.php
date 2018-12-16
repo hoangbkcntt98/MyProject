@@ -7,7 +7,7 @@
 		$name = rand(100,999).'.'.$ext;
 		$location = './upload/'.$name;
 		move_uploaded_file($_FILES["file"]["tmp_name"],$location);
-		echo '<img src = "'.$location.'" height:"100px" width="200px"/>';
+		echo '<img src = "'.$location.'"  />';
 	}
 	else
 	{

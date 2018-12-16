@@ -7,8 +7,8 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +03 7699993</a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i>student.hust.edu.vn</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i> +03 87699993</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i>20166135@student.hust.edu.vn</a></li>
 							</ul>
 						</div>
 					</div>
@@ -61,7 +61,7 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav" style="width: 500px;">
-								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+								<li><a href="acount.php"><i class="fa fa-user"></i> Account</a></li>
 								<li><a href="#"><i class="fa fa-star"></i> Favorite</a></li>
 								<li><a href="checkout.php"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="cart.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
@@ -117,7 +117,7 @@
 								<li class="dropdown"><a href="#">Sell<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="sell.php">Sell Product</a></li>
-										<li><a href="">My Product</a></li>
+										
                                     </ul>
                                 </li> 
 								<li><a href="contact_us.php">Contact</a></li>

@@ -8,9 +8,7 @@
         			var timeout = setTimeout(function(){
             		 alert('Buy sucessfully!!!');
         			},1000);
-        			$(document).ready(function(){
-     					$('body,html').animate({scrollTop: 800}, 800); 
-					});
+        			
     				</script>";
 				
 			}

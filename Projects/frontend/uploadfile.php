@@ -5,17 +5,26 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
+
+<script type="text/javascript">
+	function showname(){
+		var input = document.getElementById("name");
+		var div = document.getElementById("showname");
+		div.innerHTML = input.value;
+	}
+</script>	
 	<div>
 		<input type="file" id = "file" name="file">
 		<span id = "uploaded"></span>
 		<button id="button">Click</button>
 	</div>
-	
+	<input type="text" placeholder="Product_name" name="name" id = "name" onkeyup="showname()" />
+	<div id = "showname"></div>
 </body>
 </html>
 
 
-</script>
+
 <script>
 	
 	$('#button').click(function(){

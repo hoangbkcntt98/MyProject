@@ -102,7 +102,7 @@
 							$num=pg_num_rows($result1);
 							//limit number of record
 							
-							$a = $num/10;
+							$a = $num/6;
 							$a = ceil($a);
 							while($row = pg_fetch_assoc($result))
 							{

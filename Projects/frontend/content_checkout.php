@@ -7,57 +7,22 @@
 				</ol>
 			</div><!--/breadcrums-->
 
-			<div class="step-one">
-				<h2 class="heading">Step1</h2>
-			</div>
-			<div class="checkout-options">
-				<h3>New User</h3>
-				<p>Checkout options</p>
-				<ul class="nav">
-					<li>
-						<label><input type="checkbox"> Register Account</label>
-					</li>
-					<li>
-						<label><input type="checkbox"> Guest Checkout</label>
-					</li>
-					<li>
-						<a href=""><i class="fa fa-times"></i>Cancel</a>
-					</li>
-				</ul>
-			</div><!--/checkout-options-->
-
-			<div class="register-req">
-				<p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
-			</div><!--/register-req-->
+			
 
 			<div class="shopper-informations">
 				<div class="row">
-					<div class="col-sm-3">
-						<div class="shopper-info">
-							<p>Shopper Information</p>
-							<form>
-								<input type="text" placeholder="Display Name">
-								<input type="text" placeholder="User Name">
-								<input type="password" placeholder="Password">
-								<input type="password" placeholder="Confirm password">
-							</form>
-							<a class="btn btn-primary" href="">Get Quotes</a>
-							<a class="btn btn-primary" href="">Continue</a>
-						</div>
-					</div>
+					
 					<div class="col-sm-5 clearfix">
 						<div class="bill-to">
-							<p>Bill To</p>
+							<p style="color: orange;font-weight: 700;font-size: 35px;">Bill To</p>
 							<div class="form-one">
 								<form>
 									<input type="text" placeholder="Company Name">
 									<input type="text" placeholder="Email*">
-									<input type="text" placeholder="Title">
-									<input type="text" placeholder="First Name *">
-									<input type="text" placeholder="Middle Name">
-									<input type="text" placeholder="Last Name *">
-									<input type="text" placeholder="Address 1 *">
-									<input type="text" placeholder="Address 2">
+									
+									<input type="text" placeholder="Full Name *">
+									<input type="text" placeholder="Address">
+									
 								</form>
 							</div>
 							<div class="form-two">
@@ -65,6 +30,7 @@
 									<input type="text" placeholder="Zip / Postal Code *">
 									<select>
 										<option>-- Country --</option>
+										<option>Viet Nam</option>
 										<option>United States</option>
 										<option>Bangladesh</option>
 										<option>UK</option>
@@ -76,18 +42,16 @@
 									</select>
 									<select>
 										<option>-- State / Province / Region --</option>
-										<option>United States</option>
-										<option>Bangladesh</option>
-										<option>UK</option>
-										<option>India</option>
-										<option>Pakistan</option>
-										<option>Ucrane</option>
-										<option>Canada</option>
-										<option>Dubai</option>
+										<option>Ha Noi</option>
+										<option>Hai Phong</option>
+										<option>Hai Duong</option>
+										<option>Thanh Hoa</option>
+										<option>Quang Ninh</option>
+										
 									</select>
-									<input type="password" placeholder="Confirm password">
+									
 									<input type="text" placeholder="Phone *">
-									<input type="text" placeholder="Mobile Phone">
+									
 									<input type="text" placeholder="Fax">
 								</form>
 							</div>
@@ -95,13 +59,74 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="order-message">
-							<p>Shipping Order</p>
-							<textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
-							<label><input type="checkbox"> Shipping to bill address</label>
+							<p  style="color: orange;font-weight: 700;font-size: 35px;" >Shipping Order</p>
+							<textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="10"></textarea>
+							
 						</div>	
 					</div>					
+					<div class = "col-sm-3">
+						<div class="order-message">
+							<p  style="color: orange;font-weight: 700;font-size: 35px;" >Check out</p>
+
+						<div></div>	
+						</div>	
+						<?php include_once('../backend/trade_system/cart/connect_db.php') ?>
+							<?php 
+	//sql process
+							$idBuy = $_SESSION['id'];
+							$total = 0;
+
+							$sql = "SELECT buy.quantity,product.name,product.price,product.brand,product.idp,product.img FROM buy JOIN product ON buy.idp = product.idp WHERE buy.idc='$idBuy' and buy.status ='0'";
+							$a=pg_query($conn,$sql);
+							while ($row1 = pg_fetch_assoc($a))
+							{ 
+								$total = $row1['price']*$row1['quantity']+$total;
+							}
+							?>
+							<div class="total_area">
+								<ul>
+									<li>Cart Sub Total <span id = "total">$<?php echo $total ?></span></li>
+									<li>VAT<span>$2</span ></li>
+									<li>Shipping Cost <span>Free</span></li>
+									<li>Total <span>$<?php echo $total+2; ?></span></li>
+									<li>Blance <span>$<?php 
+										$idu = $_SESSION['id'];
+										$sql = "SELECT * FROM users WHERE id= '$idu'";
+										$row = pg_fetch_assoc(pg_query($conn,$sql));
+										echo $row['blance'];
+									 ?></span></li>
+								</ul>
+									
+							<a class="btn btn-default check_out" href="" onclick="check(<?php echo $total; ?>)" style = "margin-left: 100px;">Check Out</a>
+					</div>
+					</div>
 				</div>
 			</div>
+			<script type="text/javascript">
+				function check(total){
+					if(total==0)
+					{
+						alert('empty cart');
+					}else{
+						if(<?php echo $row['blance']; ?>>=total)
+					{
+					 $.ajax({
+					
+					
+					url : "checkout_result.php",
+					data : "total="+total,
+					type : 'post',
+					success : function(response) {
+						$('#blance').val(<?php echo $row['blance'] ?>-total);
+						alert('successfully!!!');}
+						});}
+					 else
+					 {
+					 	 alert('Not enough money!!');
+					 }
+					}
+				}
+			</script>
 			<div class="review-payment">
 				<h2>Review & Payment</h2>
 			</div>
@@ -118,109 +143,108 @@
 							<td></td>
 						</tr>
 					</thead>
+					
 					<tbody>
 						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/one.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
+							<?php include_once('../backend/trade_system/cart/connect_db.php') ?>
+							<?php 
+	//sql process
+							$idBuy = $_SESSION['id'];
+							$total = 0;
 
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/two.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/three.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="4">&nbsp;</td>
-							<td colspan="2">
-								<table class="table table-condensed total-result">
+							$sql = "SELECT buy.quantity,product.name,product.price,product.brand,product.idp,product.img FROM buy JOIN product ON buy.idp = product.idp WHERE buy.idc='$idBuy' and status ='0'";
+							$a=pg_query($conn,$sql);
+							while ($row1 = pg_fetch_assoc($a))
+							{ 
+								$total = $row1['price']*$row1['quantity']+$total;
+
+								?>
+								<tbody>
 									<tr>
-										<td>Cart Sub Total</td>
-										<td>$59</td>
+										<td class="cart_product" id = "to">
+											<a href=""><img src="../backend/trade_system/productimg/<?php echo "".$row1['img'].""; ?>" style = "width:110px;height:110px;"></a>
+										</td>
+										<td class="cart_description">
+											<h4><a><?php echo "".$row1['name'].""; ?></a></h4>
+											
+										</td>
+										<td class="cart_price">
+											<p><?php echo "".$row1['price'].""; ?></p>
+										</td>
+										<td class="cart_quantity">
+											<div class="cart_quantity_button" style="height: 28px;">
+												<a class="cart_quantity_up" onclick = "up(<?php echo "".$row1['idp'].""; ?>)" href=""> + </a>
+												<input class="cart_quantity_input" type='text' name='quantity' value=<?php echo $row1['quantity'];  ?> autocomplete='off' size='2' id ="<?php echo "".$row1['idp'].""; ?>">
+												<a class="cart_quantity_down" onclick="down(<?php echo "".$row1['idp'].""; ?>)" href = ""> - </a>
+											</div>
+										</td>
+										<td class='cart_total'>
+											<p class='cart_total_price'><?php echo "".($row1['price']*$row1['quantity']).""; ?>$</p>
+										</td>
+										<td class='cart_delete'>
+											<a class='cart_quantity_delete' onclick="drop(<?php echo $row1['idp']; ?>)" href="" ><i class='fa fa-times'></i></a>
+										</td>
 									</tr>
-									<tr>
-										<td>Exo Tax</td>
-										<td>$2</td>
-									</tr>
-									<tr class="shipping-cost">
-										<td>Shipping Cost</td>
-										<td>Free</td>										
-									</tr>
-									<tr>
-										<td>Total</td>
-										<td><span>$61</span></td>
-									</tr>
-								</table>
-							</td>
+							</TBODY>
 						</tr>
+							
 					</tbody>
+				<?php } ?>
 				</table>
 			</div>
+		</div>
+	</section> <!--/#cart_items-->
+	<script type="text/javascript">
+		function up(idp)
+		{
+			var input = document.getElementById(idp);
+			var newQuantity = parseInt(input.value)+1;
+			input.value = newQuantity;
+
+			save(idp,newQuantity);
+			
+     		
+				
+			
+		}
+		function down(idp)
+		{
+			var input = document.getElementById(idp);
+			var newQuantity = parseInt(input.value)-1;
+			input.value = newQuantity;
+
+			save(idp,newQuantity);
+
+			
+		}
+
+		function save(idp,quantity){
+			var inputQuantityElement = document.getElementById(idp);
+			    $.ajax({
+					url : "update_cart.php",
+					data : "idp="+idp+"&quantity="+quantity,
+					type : 'post',
+					success : function(response) {
+						(inputQuantityElement).innerHTML= quantity;
+						
+     					
+					
+						
+					}
+				});
+		}
+		function drop(idp){
+			$.ajax({
+					url : "drop_cart.php",
+					data : "idp="+idp,
+					type : 'post',
+					success : function(response) {
+					
+						
+					}
+				});
+		}
+	</script>
 			<div class="payment-options">
 					<span>
 						<label><input type="checkbox"> Direct Bank Transfer</label>

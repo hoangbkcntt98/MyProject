@@ -3,21 +3,16 @@
 <?php 
 	//sql process
 	$idBuy = $_SESSION['id'];
-	$sql = "SELECT * FROM buy WHERE id_buy = '$idBuy';";
+
+	$sql = "SELECT * FROM buy JOIN product ON buy.idp = product.idp WHERE buy.idc='$idBuy'";
 	$a=pg_query($conn,$sql);
-	while($row = pg_fetch_assoc($a))
-		{
-			$idSell = $row['id_sell'];
-			$idP = $row['id_p'];
-			$sql = "SELECT * FROM sell_product WHERE id_p = '$idP' AND id_user= '$idSell'";
-			$b = pg_query($conn,$sql);
-			while ($row1 = pg_fetch_assoc($b))
+			while ($row1 = pg_fetch_assoc($a))
 			{
 				echo "
 				<tbody>
 						<tr>
 							<td class='cart_product'>
-								<a href=''><img src='../backend/trade_system/products/".$row1['img']."' alt='' style = 'width:110px;height:110px;'></a>
+								<a href=''><img src='../backend/trade_system/productimg/".$row1['img']."' alt='' style = 'width:110px;height:110px;'></a>
 							</td>
 							<td class='cart_description'>
 								<h4><a href=''>".$row1['name']."</a></h4>
@@ -28,13 +23,13 @@
 							</td>
 							<td class='cart_quantity'>
 								<div class='cart_quantity_button'>
-									<a class='cart_quantity_up' href=''> + </a>
-									<input class='cart_quantity_input' type='text' name='quantity' value='1' autocomplete='off' size='2'>
-									<a class='cart_quantity_down' href=''> - </a>
+									<a class='cart_quantity_up' id='".$row1['idp']."up' onclick = 'up".$row1['idp']."()' href=''> + </a>
+									<input class='cart_quantity_input' type='text' name='quantity' value='".$row1['quantity']."' autocomplete='off' size='2' id = '".$row1['idp']."''>
+									<a class='cart_quantity_down id ='".$row1['idp']."down' onclick='down()' href=''> - </a>
 								</div>
 							</td>
 							<td class='cart_total'>
-								<p class='cart_total_price'>$59</p>
+								<p class='cart_total_price'>".($row1['price']*$row1['quantity'])."$</p>
 							</td>
 							<td class='cart_delete'>
 								<a class='cart_quantity_delete' href=''><i class='fa fa-times'></i></a>
@@ -42,9 +37,6 @@
 						</tr>
 				</TBODY>
 				";
-
+				
 			}
-		}
-			
-
- ?>
+			?>

@@ -31,7 +31,7 @@
 				$f_ActualExt= strtolower(end($f_Ext));
 				$allowed = array('jpg','jpeg','png');
 				if(in_array($f_ActualExt,$allowed)) {
-					if($f_Size<100000){
+					
 
 						$f_NameNew = uniqid('',true).".".$f_ActualExt;
 						$f_Destination = 'productimg/'.$f_NameNew;
@@ -41,9 +41,7 @@
 						pg_query($conn,$sql);
 						header("location:../../frontend/sell.php?success");
 
-					}else{
-						header("location:../../frontend/sell.php?error=imgsize");
-					}
+					
 				}else{
 						header("location:../../frontend/sell.php?error=img");
 					
