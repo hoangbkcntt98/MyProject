@@ -37,13 +37,17 @@
 			}
 
 		?>
-		<div class="container">
-			<img src="images/shop/advertisement.jpg" alt="" />
-		</div>
+		
 	</section>
 	
 	<section>
 		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="index.php">Home</a></li>
+				  <li class="active">Shop</li>
+				</ol>
+			</div><!--/breadcrums-->
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="left-sidebar">

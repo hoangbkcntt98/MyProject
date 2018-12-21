@@ -38,13 +38,18 @@
 			}
 
 		?>
-		<div class="container">
-			<img src="images/shop/advertisement.jpg" alt="" />
-		</div>
+		
 	</section>
 	
 	<section>
 		<div class="container">
+			<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="index.php">Home</a></li>
+				  <li class="active">Search</li>
+				</ol>
+			</div><!--/breadcrums-->
 			<div class="row">
 
 				<div class="col-sm-12 padding-center">
@@ -56,40 +61,7 @@
 						
 					</div><!--features_items-->
 					<?php 
-					echo "
-								<ul class='pagination' style='margin-left:50%;'>";
-								
-								
-									if(strpos($fulUrl,'?brand'))
-									{
-										if(strpos($fulUrl,'&page'))
-										{
-											$fulUrl = explode('&page',$fulUrl);
-											array_pop($fulUrl);
-											$fulUrl= implode($fulUrl);
-											
-											for($b=1;$b<=$a;$b++)
-											{
-											echo "<li><a href='".$fulUrl."&page=".$b."'>".$b."</a></li>";
-											}
-										}else
-										{
-											for($b=1;$b<=$a;$b++)
-												{
-													echo "<li><a href='".$fulUrl."&page=".$b."'>".$b."</a></li>";
-												}
-											
-										}
-										
-									}else
-									{
-											for($b=1;$b<=$a;$b++)
-												{
-													echo "<li><a href='shop.php?page=".$b."'>".$b."</a></li>";
-												}
-										
-										
-									}
+					
  ?>
 				</div>
 			</div>

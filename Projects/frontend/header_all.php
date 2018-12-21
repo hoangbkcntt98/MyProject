@@ -108,12 +108,7 @@
 										<li><a href="login.php">Login</a></li> 
                                     </ul>
                                 </li> 
-								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.php">Blog List</a></li>
-										<li><a href="blog_single.php">Blog Single</a></li>
-                                    </ul>
-                                </li> 
+								
 								<li class="dropdown"><a href="#">Sell<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="sell.php">Sell Product</a></li>
@@ -126,7 +121,11 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
+							<form method="POST" action = "search.php">
+								<input type="text" name="search">
+								<button name = "submit" type = "submit" style = "display: block;width: 30px; height: 30px;margin: 2px 0 0 0; float:right;"><span class="glyphicon glyphicon-search"></span>	</button>
+
+							</form>
 						</div>
 					</div>
 				</div>

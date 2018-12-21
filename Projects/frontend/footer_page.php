@@ -4,8 +4,9 @@
 				<div class="row">
 					<div class="col-sm-2">
 						<div class="companyinfo">
-							<h2><span>e</span>-shopper</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+							<h2><span>Cuon</span>-shopper</h2>
+							<p>Trời ơi tin được hông</p>
+							<p>Sale 91 91 91 %</p>
 						</div>
 					</div>
 					<div class="col-sm-7">
@@ -97,7 +98,7 @@
 					</div>
 					<div class="col-sm-2">
 						<div class="single-widget">
-							<h2>Quock Shop</h2>
+							<h2>Quick Shop</h2>
 							<ul class="nav nav-pills nav-stacked">
 								<li><a href="#">T-Shirt</a></li>
 								<li><a href="#">Mens</a></li>

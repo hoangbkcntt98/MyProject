@@ -51,7 +51,7 @@
 										if(strpos($fulUrl,'pricemin='))
 										{
 											$price = $_GET['pricemin'];
-											$sql = "SELECT * FROM product WHERE brand = '".$brand."' AND category='".$category."' AND price >=".$price." AND price <=".($price+$step)." limit 6 offset $currentPage";
+											$sql = "SELECT * FROM product WHERE brand = '".$brand."' AND category='".$category."' AND price >=".$price." AND price <=".($price+$step)."  limit 6 offset $currentPage";
 											$result = pg_query($conn,$sql);
 											$sql1 = "SELECT * FROM product WHERE brand = '".$brand."' AND category='".$category."' AND price >=".$price." AND price <=".($price+$step)."";
 											$result1 = pg_query($conn,$sql1);
@@ -73,12 +73,12 @@
 											$price = $_GET['pricemin'];
 											$sql = "SELECT * FROM product WHERE brand = '".$brand."' AND price >=".$price." AND price <=".($price+$step)." limit 6 offset $currentPage";
 											$result = pg_query($conn,$sql);
-											$sql1 = "SELECT * FROM product WHERE brand = '".$brand."' AND price >=".$price." AND price <=".($price+$step)." ";
+											$sql1 = "SELECT * FROM product WHERE brand = '".$brand."' AND price >=".$price." AND price <=".($price+$step)." order by idp";
 											$result1 = pg_query($conn,$sql1);
 										}
 										else
 										{
-											$sql = "SELECT * FROM product WHERE brand = '".$brand."' limit 6 offset $currentPage";
+											$sql = "SELECT * FROM product WHERE brand = '".$brand."' order by idp limit 6 offset $currentPage";
 											$result = pg_query($conn,$sql);
 											$sql1 = "SELECT * FROM product WHERE brand = '".$brand."'";
 											$result1 = pg_query($conn,$sql1);
@@ -91,7 +91,7 @@
 								}
 							
 							else{
-								$sql = "SELECT * FROM product limit 6 offset $currentPage;";
+								$sql = "SELECT * FROM product order by idp limit 6 offset '$currentPage' ;";
 								$result = pg_query($conn,$sql);
 								$sql1 = "SELECT * FROM product ;";
 								$result1 = pg_query($conn,$sql1);
@@ -145,7 +145,7 @@
 								else{
 
 								echo "
-														<a href='./product_details.php?idp=".$row['idp']."' class='btn btn-default add-to-cart'></i>Views detail</a>
+														<a href='product_details.php?idp=".$row['idp']."' class='btn btn-default add-to-cart'></i>Views detail</a>
 														<p>Or</p>
 														";
 									if(isset($_SESSION['id']))

@@ -12,7 +12,7 @@
         {
             echo "<title>Cart|".$_SESSION['name']."</title>";
         }else{
-            echo "<title>Cart | E-Shopper</title>";
+            header("location:index.php");
          
         }
         ?>

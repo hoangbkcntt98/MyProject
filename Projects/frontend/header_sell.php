@@ -7,12 +7,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <?php 
-    if(isset($_SESSION['id']))
-    {
-    	echo "<title>".$_SESSION['name']."|Sell</title>";
-
-    }
-    ?>
+        if(isset($_SESSION['id']))
+        {
+            echo "<title>SELL|".$_SESSION['name']."</title>";
+        }else{
+            header('location:index.php');
+         
+        }
+        ?>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
